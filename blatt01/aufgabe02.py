@@ -1,5 +1,6 @@
 import random
-
+import numpy as np
+import matplotlib.pyplot as plt
 
 def simulate_sammelbilder(n, trials):
     total_riegel_pro_sammlung = 0  # Gesamtanzahl der Schokoriegel pro vollständiger Sammlung
@@ -34,10 +35,16 @@ def simulate_sammelbilder(n, trials):
 
     return durchschnitt_riegel, durchschnitt_schritte
 
+def plot_results(n, durchschnitt_schritte):
+    plt.bar(range(1, n + 1), durchschnitt_schritte, color='blue')
+    plt.xlabel('Anzahl der verschiedenen Bilder')
+    plt.ylabel('Mittlere Anzahl der Schokoriegel')
+    plt.title('Mittlere Anzahl der Schokoriegel, um von i auf i+1 zu kommen')
+    plt.show()
 
 # Parameter
 n = 63  # Anzahl der verschiedenen Sammelbilder
-trials = 1000000  # Anzahl der Wiederholungen der Simulation
+trials = 10000  # Anzahl der Wiederholungen der Simulation
 
 # Simulation starten
 durchschnitt_riegel, durchschnitt_schritte = simulate_sammelbilder(n, trials)
@@ -47,3 +54,6 @@ print(f"Mittlere Anzahl von Schokoriegeln für eine vollständige Sammlung (n={n
 print("Mittlere Anzahl von Schokoriegeln, um von i auf i+1 zu kommen:")
 for i, schritte in enumerate(durchschnitt_schritte):
     print(f"Von {i} auf {i + 1}: {schritte:.2f} Schokoriegel")
+
+# Ergebnisse grafisch darstellen
+plot_results(n, durchschnitt_schritte)
