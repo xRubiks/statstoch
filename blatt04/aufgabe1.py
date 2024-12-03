@@ -21,6 +21,7 @@ def harmonicMean(dataAsList):
         hMean += 1/i
     return len(dataAsList) / hMean
 
+#need to change something
 
 
 print(arithmeticMean(data))
