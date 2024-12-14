@@ -1,5 +1,4 @@
 import math
-import numpy as np
 
 data = [16, 10, 6.5, 7, 3, 6, 7, 5, 5.5, 4, 7]
 
@@ -77,16 +76,31 @@ def distribution_values(data_as_list):
         distribution += i/sum(data_as_list)
         print(" " + str(i) + ": " + str(distribution))
 
+#calculate values for lorenz-curve
+def lorenz_curve(data_as_list):
+    for i in range(1, len(data_as_list) + 1):
+        numerator = sum(data_as_list[:i])
+        denominator = sum(data_as_list)
+        print(" (" + str(i/len(data_as_list)) + ", " + str(numerator/denominator) + ")")
 print("distribution values:")
 distribution_values(data)
-print("Arithmetic Mean: " + str(arithmetic_mean(data)))
+
+
+print("\nArithmetic Mean: " + str(arithmetic_mean(data)))
 print("Geometric Mean: " + str(geometric_mean(data)))
 print("Harmonic Mean: " + str(harmonic_mean(data)))
 print("Variance: " + str(variance(data)))
 print("Samplevariance: " + str(sample_variance(data)))
+
+print("\nBoxplot values:")
 print("Median: " + str(median(data)))
 print("x_0.25: " + str(x_quarter(data)))
 print("x_0.75: " + str(x_three_quarter(data)))
 print("IQR: " + str(IQR(data)))
 print("Whiskers: " + whiskers(data))
+
+
+print("\nLorenz-curve values:")
+lorenz_curve(data)
+
 
