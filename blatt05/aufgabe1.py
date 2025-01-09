@@ -1,7 +1,12 @@
+import math
+
 import matplotlib.pyplot as plt
+from fontTools.misc.bezierTools import epsilon
 
 #stores the probabilities of the points with n dice
 dice_points = {}
+epsilonTilde = []
+epsilonPlain = []
 
 #probability of 1 dice with k points
 for i in range(6):
@@ -71,5 +76,11 @@ for i in range(2,41):
             k_star = key
     k_max.append(k_star)
 
+n=2
 for k_star in k_max:
+    epsilonTilde.append(3.5 - (k_star/n))
+    epsilonPlain.append(math.sqrt((35/12)/(n * (1/10))))
+    n+=1
     print("k* für n = " + str(k_max.index(k_star) + 2) + ": " + str(k_star))
+    print("epsilonTilde für n = " + str(k_max.index(k_star) + 2) + ": " + str(epsilonTilde[k_max.index(k_star)]))
+    print("epsilonPlain für n = " + str(k_max.index(k_star) + 2) + ": " + str(epsilonPlain[k_max.index(k_star)]))
