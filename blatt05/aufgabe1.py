@@ -1,12 +1,12 @@
 import math
 
 import matplotlib.pyplot as plt
-from fontTools.misc.bezierTools import epsilon
 
 #stores the probabilities of the points with n dice
 dice_points = {}
 epsilonTilde = []
 epsilonPlain = []
+epsilonStd = []
 
 #probability of 1 dice with k points
 for i in range(6):
@@ -43,7 +43,7 @@ for key in dice_points:
 #x-axis: shift everything by 5
 plt.bar(range(5, 5*6+1), distributionW_5)
 plt.title("Wahrscheinlichkeitsverteilung von W_5")
-plt.savefig("../pics/distributionW_5.png")
+plt.savefig("../pics/B5T1a1.png")
 plt.close()
 
 #plot the accumulated distribution as a line chart
@@ -55,7 +55,7 @@ plt.step(range(5, 5*6 +1), accumulatedDistributionW_5, where='post', color="blue
 plt.scatter(range(5, 5*6+1), accumulatedDistributionW_5)
 plt.xticks(range(5, 5*6 + 1))
 plt.title("Verteilungsfunktion von W_5")
-plt.savefig("../pics/accumulatedDistributionW_5.png")
+plt.savefig("../pics/B5T1a2.png")
 plt.close()
 
 k_max = []
@@ -79,8 +79,17 @@ for i in range(2,41):
 n=2
 for k_star in k_max:
     epsilonTilde.append(3.5 - (k_star/n))
-    epsilonPlain.append(math.sqrt((35/12)/(n * (1/10))))
+    epsilonPlain.append((math.sqrt((35/12)/(n * (1/10)))))
+    epsilonStd.append(1.64 * math.sqrt((35 / 12) / n))
     n+=1
-    print("k* für n = " + str(k_max.index(k_star) + 2) + ": " + str(k_star))
-    print("epsilonTilde für n = " + str(k_max.index(k_star) + 2) + ": " + str(epsilonTilde[k_max.index(k_star)]))
-    print("epsilonPlain für n = " + str(k_max.index(k_star) + 2) + ": " + str(epsilonPlain[k_max.index(k_star)]))
+    # print("k* für n = " + str(k_max.index(k_star) + 2) + ": " + str(k_star))
+    # print("epsilonTilde für n = " + str(k_max.index(k_star) + 2) + ": " + str(epsilonTilde[k_max.index(k_star)]))
+    # print("epsilonPlain für n = " + str(k_max.index(k_star) + 2) + ": " + str(epsilonPlain[k_max.index(k_star)]))
+
+plt.scatter(range(2, 41), epsilonTilde, color="blue", label="epsilonTilde")
+plt.scatter(range(2, 41), epsilonPlain, color="red", label="epsilon")
+plt.scatter(range(2, 41), epsilonStd, color="green", label="epsilonStd")
+plt.legend()
+plt.title("epsilonTilde und epsilon")
+plt.savefig("../pics/B5T1b.png")
+plt.close()
