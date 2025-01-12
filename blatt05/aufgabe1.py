@@ -46,16 +46,23 @@ plt.title("Wahrscheinlichkeitsverteilung von W_5")
 plt.savefig("../pics/B5T1a1.png")
 plt.close()
 
-#plot the accumulated distribution as a line chart
+#plot the accumulated distribution as a point chart
 accumulatedDistributionW_5 = [0]
 for i in range(1, len(distributionW_5)):
     accumulatedDistributionW_5.append(accumulatedDistributionW_5[i-1] + distributionW_5[i])
 
-plt.step(range(5, 5*6 +1), accumulatedDistributionW_5, where='post', color="blue")
-plt.scatter(range(5, 5*6+1), accumulatedDistributionW_5)
-plt.xticks(range(5, 5*6 + 1))
+x_values = range(5, 5*6 + 1)
+#plt.step(x_values, accumulatedDistributionW_5, where='post', color="blue")
+plt.scatter(x_values, accumulatedDistributionW_5)
+
+# Add horizontal lines
+for i in range(len(x_values) - 1):
+    plt.hlines(accumulatedDistributionW_5[i], x_values[i], x_values[i+1], colors='blue')
+
+plt.xticks(x_values)
 plt.title("Verteilungsfunktion von W_5")
-plt.savefig("../pics/B5T1a2.png")
+plt.savefig('../pics/B5T1a2.png')
+plt.show()
 plt.close()
 
 k_max = []
